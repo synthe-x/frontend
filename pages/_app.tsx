@@ -5,7 +5,8 @@ import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-
+import { ChakraProvider } from '@chakra-ui/react'
+import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 const { chains, provider, webSocketProvider } = configureChains(
   [
     chain.mainnet,
@@ -37,14 +38,26 @@ const wagmiClient = createClient({
   provider,
   webSocketProvider,
 });
-
+const config: ThemeConfig = {
+  initialColorMode: 'dark',
+}
+const breakpoints ={
+  sm: "360px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1440px",
+  "2xl": "1680px"
+};
+const theme = extendTheme({ config,breakpoints })
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    <ChakraProvider theme={theme}>
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
+    </ChakraProvider>
   );
 }
 
