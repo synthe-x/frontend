@@ -1,0 +1,32 @@
+{
+	"networks": {
+		"goerli": {
+			"name": "Göerli Testnet",
+			"contracts": {
+				"AddressResolver": "0x8b2956EF871f6f0Dd3BC783607a748aEb80bF6E1",
+				"System": "0x9bC460524Adc9AFa42D73f03f0d90F5D188b8C2b",
+				"Reserve": "0xDa5EF7F19C7e7744E7CbB047368e5EB10d1061e4",
+				"Exchanger": "0x72a9753F139F1E27F7A9B4f44cf907141F6136aD",
+				"DebtManager": "0x509680d9957Adf11493958CF8E4851B868d596eF",
+				"CollateralManager": "0xB34A3264F85E632d9D71DEF60ec675E7cB39c11B",
+				"Helper": "0xA49dbabA6B087992bA8262B4D7A19F63989e9CAF",
+				"FixedInterestRate": "0xFCFFEa011EaB08Bb8009bD94aa87bE9b280C76B5",
+				"Liquidator": "0x3F7d28a525b3bf5fBad280d47570Abd261f06be5"
+			}
+		},
+		"nile": {
+			"name": "Nile Testnet",
+			"contracts": {
+				"AddressResolver": "0x8b2956EF871f6f0Dd3BC783607a748aEb80bF6E1",
+				"System": "0x9bC460524Adc9AFa42D73f03f0d90F5D188b8C2b",
+				"Reserve": "0xDa5EF7F19C7e7744E7CbB047368e5EB10d1061e4",
+				"Exchanger": "0x72a9753F139F1E27F7A9B4f44cf907141F6136aD",
+				"DebtManager": "0x509680d9957Adf11493958CF8E4851B868d596eF",
+				"CollateralManager": "0xB34A3264F85E632d9D71DEF60ec675E7cB39c11B",
+				"Helper": "0xA49dbabA6B087992bA8262B4D7A19F63989e9CAF",
+				"FixedInterestRate": "0xFCFFEa011EaB08Bb8009bD94aa87bE9b280C76B5",
+				"Liquidator": "0x3F7d28a525b}3bf5fBad280d47570Abd261f06be5"
+			}
+		}
+	}
+}
