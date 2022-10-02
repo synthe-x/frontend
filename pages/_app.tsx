@@ -1,21 +1,19 @@
 import '../styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { RainbowKitProvider, getDefaultWallets, darkTheme } from '@rainbow-me/rainbowkit';
 import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    chain.mainnet,
-    chain.polygon,
-    chain.optimism,
-    chain.arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true'
-      ? [chain.goerli, chain.kovan, chain.rinkeby, chain.ropsten]
-      : []),
+    // chain.goerli,
+    chain.localhost
   ],
   [
     alchemyProvider({
@@ -38,9 +36,11 @@ const wagmiClient = createClient({
   provider,
   webSocketProvider,
 });
+
 const config: ThemeConfig = {
   initialColorMode: 'dark',
 }
+
 const breakpoints ={
   sm: "360px",
   md: "768px",
@@ -53,8 +53,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} theme={darkTheme()}>
+        <Flex justify={"center"}>
+        <Box maxWidth={"1200px"}>
+        <Navbar />
         <Component {...pageProps} />
+        </Box>
+        </Flex>
+        <Footer/>
       </RainbowKitProvider>
     </WagmiConfig>
     </ChakraProvider>
