@@ -18,7 +18,7 @@ a {
 .borrow_table_data {
   width: 150px;
   text-align: center;
-  background-color:#252525;
+
   border-right: hidden;
   padding: 10px;
 }
@@ -29,8 +29,6 @@ a {
   font-weight: bold;
   height: 50px;
   text-align: center;
-  color: white !important;
-  background-color:#252525;
   border-right: hidden;
   padding: 10px;
 }

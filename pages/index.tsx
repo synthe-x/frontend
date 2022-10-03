@@ -5,9 +5,12 @@ import CollateralTable from '../components/CollateralTable';
 import { useEffect, useState } from 'react';
 import { getContract } from '../src/utils';
 import { useAccount } from 'wagmi';
+import { useRouter } from 'next/router'
 import { MdOutlineOpenInNew } from 'react-icons/md';
+import Link from 'next/link';
 
 function Index() {
+	const router = useRouter();
 	useEffect(() => {}, []);
 
 	return (
@@ -29,11 +32,16 @@ function Index() {
 						SyntheX is a trustless asset issuance and trading platform for crypto derivatives, which bridges the gap between the real world assets and the DeFi ecosystem
 					</Text>
 					<Box mt={10}>
+					
 						<Button size="lg"
+						onClick={()=>{
+							router.push("/app")
+						  }}
             colorScheme={'whatsapp'}
             variant="outline">
 							Open App <MdOutlineOpenInNew size={20} style={{marginLeft: "5px"}} />
 						</Button>
+						
 						<Button
 							size="lg"
 							

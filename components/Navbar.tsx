@@ -29,7 +29,9 @@ function newapp() {
     <>
       <Flex justify={"space-between"} alignItems={"center"}>
         <Box>
-          <Image src={colorMode == "dark" ? darklogo : lightlogo} alt="" width="100px" height="100px" />
+          <Image onClick={()=>{
+            router.push("/")
+          }} src={colorMode == "dark" ? darklogo : lightlogo} alt="" width="100px" height="100px" />
         </Box>
 
 
@@ -134,11 +136,11 @@ function newapp() {
 
                               <Box p="0.5rem" display={"flex"} justifyContent="center" alignItems="baseline" borderRadius="20px" backgroundColor={"gray.600"} height="3rem" border="1px solid #114D80" color="#B7C1C9" >
 
-                                <Text ml="8px" fontFamily="Roboto" fontSize={"xl"} mr={"3"} fontWeight="bold">{account.displayBalance
+                                <Text ml="8px" fontFamily="Roboto" fontSize={"md"} mr={"3"} fontWeight="bold">{account.displayBalance
                                   ? `${account.displayBalance}`
                                   : ''}</Text>
 
-                                <Button size={"xs"} fontFamily="Poppins" fontSize={"xl"} color="white" onClick={openAccountModal} mt="3px" mr="2px" type="button" borderRadius={"20px"}>
+                                <Button size={"xs"} color={colorMode == "dark" ?"#FFFFF" : "#171717"} fontFamily="Poppins" fontSize={"xl"}  onClick={openAccountModal} mt="3px" mr="2px" type="button" borderRadius={"20px"}>
                                   {account.displayName}
 
                                 </Button>

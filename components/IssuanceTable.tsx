@@ -11,7 +11,7 @@ import {
 	Box,
 	Text,
 	Flex,
-	useDisclosure,
+	useDisclosure,useColorMode
 } from '@chakra-ui/react';
 
 import Image from 'next/image';
@@ -19,6 +19,7 @@ import IssueModel from './modals/IssueModal';
 import RepayModel from './modals/RepayModal';
 
 const IssuanceTable = ({ debts, minCRatio, collateralBalance, cRatio }) => {
+	const { colorMode } = useColorMode();
 	const tknholdingImg = {
 		width: '30px',
 		marginLeft: '1rem',
@@ -29,14 +30,14 @@ const IssuanceTable = ({ debts, minCRatio, collateralBalance, cRatio }) => {
 	return (
 		<>
 			<TableContainer>
-				<Table
+				<Table  overflow={"auto"}
 					variant="simple"
 					style={{
 						borderCollapse: 'separate',
 						borderSpacing: '0 15px',
 					}}>
 					<Thead>
-						<Tr>
+						<Tr  bg={colorMode == "dark" ?"#171717" : "#ededed"}>
 							<Th
 								fontSize={'xs'}
 								fontFamily="Poppins"
@@ -72,7 +73,7 @@ const IssuanceTable = ({ debts, minCRatio, collateralBalance, cRatio }) => {
 					<Tbody>
 						{debts.map((debt: any) => {
 							return (
-								<Tr key={debt['asset']['id']}>
+								<Tr key={debt['asset']['id']}  bg={colorMode == "dark" ?"#171717" : "#ededed"}>
 									<Td
 										id="borrow_table_dataLeftBorderRadius"
 										className="borrow_table_data">

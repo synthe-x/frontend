@@ -3,63 +3,63 @@
     "AddressResolver": {
       "source": "AddressResolver",
       "constructorArguments": [],
-      "address": "0x7811A1648e43F1bC207d7DF21B039AE9D2870b91"
+      "address": "0x8356cD34362cF1E4d21Ea6A3321105370c40C69f"
     },
     "System": {
       "source": "System",
       "constructorArguments": [
-        "0x7811A1648e43F1bC207d7DF21B039AE9D2870b91"
+        "0x8356cD34362cF1E4d21Ea6A3321105370c40C69f"
       ],
-      "address": "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+      "address": "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
     },
     "Reserve": {
       "source": "Reserve",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0x319554eF50998660776CF0EF924073e5c416b890"
+      "address": "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
     },
     "Exchanger": {
       "source": "Exchanger",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0xC54c6f1296C01B840927B303Fd5DFea076599feC"
+      "address": "0x847B3759952fAEE808c424D5305BaaEA5582Ab36"
     },
     "DebtManager": {
       "source": "DebtManager",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0xf5C468f11D73c183619faac4cDeB6272b6C390Bb"
+      "address": "0xa7f128aEf66cAa49528a47bf21B5d5c1e10B0913"
     },
     "CollateralManager": {
       "source": "CollateralManager",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0x8356cD34362cF1E4d21Ea6A3321105370c40C69f"
+      "address": "0x032B5F56CDa48Ee1c3C6B8DDbd4a9794E01DBfb8"
     },
     "Helper": {
       "source": "Helper",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
+      "address": "0x3FD3d725e7Ab6C1E12a916410437f47b002560d2"
     },
     "FixedInterestRate": {
       "source": "FixedInterestRate",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+      "address": "0x3c682cf8492e3e7206E984278bd30e030C703De8"
     },
     "Liquidator": {
       "source": "Liquidator",
       "constructorArguments": [
-        "0x736D46D93104EDd3c3968a718F02D46f422D91E9"
+        "0x84F36aeF81aBf1E34bcA9e470fE15e12697CB7Fd"
       ],
-      "address": "0x847B3759952fAEE808c424D5305BaaEA5582Ab36"
+      "address": "0x72f78328bf23b9A44d3Cc41189e5fd874BF01cBC"
     },
     "SynthexCollateralizedEthereum": {
       "source": "CollateralERC20",
@@ -73,7 +73,7 @@
           "hex": "0x016345785d8a0000"
         }
       ],
-      "address": "0x6F51F8340750990e4838F7f9db8523E9295B827D"
+      "address": "0x1BbAE482098a39B514A1f1c810ff3a834Be3672c"
     },
     "SynthexBTC": {
       "source": "SynthERC20",
@@ -81,9 +81,9 @@
         "Synthex BTC",
         "sxBTC",
         "0xA39434A63A52E749F02807ae27335515BA4b07F7",
-        "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+        "0x3c682cf8492e3e7206E984278bd30e030C703De8"
       ],
-      "address": "0xeeA0ab0A66a3dd92BF168d308467D5D6d6043F1C"
+      "address": "0xf23984c55288e2DA0f75CE6b5E9bDc8723d88942"
     },
     "SynthexETH": {
       "source": "SynthERC20",
@@ -91,9 +91,9 @@
         "Synthex ETH",
         "sxETH",
         "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
-        "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+        "0x3c682cf8492e3e7206E984278bd30e030C703De8"
       ],
-      "address": "0x92DC37a66277Cc0Ed56407BdC23aA1f9116a1B98"
+      "address": "0xeb6bEB2223c501D1732cd951228Ab192FBbf65F6"
     },
     "SynthexFORTH": {
       "source": "SynthERC20",
@@ -101,9 +101,9 @@
         "Synthex FORTH",
         "sxFORTH",
         "0x7A65Cf6C2ACE993f09231EC1Ea7363fb29C13f2F",
-        "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+        "0x3c682cf8492e3e7206E984278bd30e030C703De8"
       ],
-      "address": "0xe7f1cB914D2B3E8CF31b7E9b15B3d592394e8897"
+      "address": "0xA89B53DAC2b8355e1AE31B7dE6dA1a8CbabA46BB"
     },
     "SynthexLINK": {
       "source": "SynthERC20",
@@ -111,9 +111,9 @@
         "Synthex LINK",
         "sxLINK",
         "0x48731cF7e84dc94C5f84577882c14Be11a5B7456",
-        "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+        "0x3c682cf8492e3e7206E984278bd30e030C703De8"
       ],
-      "address": "0xC3F0aF65D39649AE7B7A57D7D9D2aa954d81529B"
+      "address": "0x388ce0840794D3fE7570DCe2A70B077985047260"
     },
     "SynthexDAI": {
       "source": "SynthERC20",
@@ -121,9 +121,9 @@
         "Synthex DAI",
         "sxDAI",
         "0x0d79df66BE487753B02D015Fb622DED7f0E9798d",
-        "0x6dD1d5459CfF7eD8Bd60FdD08fb461A5A849469B"
+        "0x3c682cf8492e3e7206E984278bd30e030C703De8"
       ],
-      "address": "0xc22df28fBf7A1e088a3614C13844eDd446ace214"
+      "address": "0x70BbA35481c32Ffcf2Ef48CE455669ac0F90CA4E"
     }
   },
   "sources": {
