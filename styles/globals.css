@@ -1,6 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
+@font-face {
+  font-family: 'basement';
+  src: url('../components/asset/basement-grotesque/BasementGrotesque-Black_v1.202.otf');
+
+  font-style: normal;
+  }
+  
+@font-face {
+  font-family: 'Satoshi';
+  src: url('../components/asset/Satoshi_Complete/Fonts/OTF/Satoshi-Light.otf');
+  font-weight: 600;
+  font-style: normal;
+  }
+  
+
+
 html,
 body {
   padding: 0;
@@ -48,4 +64,22 @@ a {
 #borrow_table_datarightBorderRadius{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+.bg{
+  background-image: url("../public/coin.svg");
+  background-size:(100%,100%);
+ background-position: right center;;
+ background-repeat: no-repeat;
+ transform: scale(1);
+}
+.rad{
+  background-image: radial-gradient(50% 50% at 50% 50%,#a92c65a6, rgba(0, 0, 0, 0) 100%);
+}
+.link_active {
+  border-bottom: 5px solid green;
+}
+
+.sidebar_link_active {
+  border-left: 5px solid green;
+  padding-left: 0.3rem;
 }

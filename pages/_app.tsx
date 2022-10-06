@@ -8,7 +8,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -31,7 +31,7 @@ const { connectors } = getDefaultWallets({
 });
 
 const wagmiClient = createClient({
-  autoConnect: true,
+  autoConnect: false,
   connectors,
   provider,
   webSocketProvider,
@@ -55,8 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()}>
         <Flex justify={"center"} flexDirection={{sm:"column",md:"row"}}>
-        <Box maxWidth={"1300px"}>
-        <Navbar />
+        <Box maxWidth={"1300px"} minWidth="100%">
         <Component {...pageProps} />
         </Box>
         </Flex>

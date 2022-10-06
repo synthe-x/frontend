@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {
 	Button,
 	Box,
@@ -26,16 +26,15 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { getContract } from '../../src/utils';
 import { useAccount } from 'wagmi';
 
-
+import { appContext } from '../../pages/app'
 const DepositModal = ({ asset, balance }) => {
+	const AppData = useContext(appContext)
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [amount, setAmount] = React.useState(null);
 	const [loader, setloader] = React.useState(false)
 	const [hash, sethash] =  React.useState("")
 	const [depositerror,setdepositerror] = React.useState()
 	const [depositconfirm, setdepositconfirm] = React.useState(false)
-	const { address, isConnecting, isConnected, isDisconnected } = useAccount();
-
 	const changeAmount = (event: any) =>{
 		setAmount(event.target.value);
 	}
@@ -48,7 +47,7 @@ const DepositModal = ({ asset, balance }) => {
 		let reserve = getContract('Reserve', 'goerli');
 		let value = (amount*10**asset['decimals']).toString();
 		reserve.methods.increaseCollateral(asset['id'], value)
-		.send({from: address, value}, (error: any, hash: any) => {
+		.send({from: AppData.address, value}, (error: any, hash: any) => {
 			console.log(hash);
 		})
 		.on('error', function(error: any){ 

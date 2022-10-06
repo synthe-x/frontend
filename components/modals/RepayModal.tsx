@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {
 	Button,
 	Box,
@@ -26,16 +26,15 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { getContract } from '../../src/utils';
 import { useAccount } from 'wagmi';
 
-
+import { appContext } from '../../pages/app'
 const RepayModal = ({ asset, balance }) => {
+	const AppData = useContext(appContext)
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [loader, setloader] = React.useState(false)
 	const [hash, sethash] =  React.useState("")
 	const [repayerror,setrepayerror] = React.useState()
 	const [repayconfirm, setrepayconfirm] = React.useState(false)
 	const [amount, setAmount] = React.useState(null);
-	const { address, isConnecting, isConnected, isDisconnected } = useAccount();
-
 	const changeAmount = (event: any) =>{
 		setAmount(event.target.value);
 	}
@@ -50,7 +49,7 @@ const RepayModal = ({ asset, balance }) => {
 		let value = (amount*10**asset['decimals']).toString();
 		console.log(asset['id'], asset['name'])
 		reserve.methods.repay(asset['id'], value)
-		.send({from: address}, (error: any, hash: any) => {
+		.send({from: AppData.address}, (error: any, hash: any) => {
 			console.log(hash);
 		})
 		.on('error', function(error: any){ 

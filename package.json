@@ -23,6 +23,8 @@
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
+    "tronweb": "^4.4.0",
+    "use-tronlink": "^0.0.7",
     "wagmi": "^0.6.0",
     "web3": "^1.8.0"
   },

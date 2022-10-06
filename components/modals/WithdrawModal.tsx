@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {
 	Button,
 	Box,
@@ -27,16 +27,15 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { getContract } from '../../src/utils';
 import { useAccount } from 'wagmi';
 
-
+import { appContext } from '../../pages/app'
 const WithdrawModal = ({ asset, balance }) => {
+	const AppData = useContext(appContext)
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [amount, setAmount] = React.useState(null);
 	const [loader, setloader] = React.useState(false)
 	const [hash, sethash] =  React.useState("")
 	const [withdrawerror,setwithdrawerror] = React.useState()
 	const [withdrawconfirm, setwithdrawconfirm] = React.useState(false)
-	const { address, isConnecting, isConnected, isDisconnected } = useAccount();
-
 	const changeAmount = (event: any) =>{
 		setAmount(event.target.value);
 	}
@@ -51,7 +50,7 @@ const WithdrawModal = ({ asset, balance }) => {
 		let value = (amount*10**asset['decimals']).toString();
 		console.log(asset['id'], asset['name'])
 		reserve.methods.decreaseCollateral(asset['id'], value)
-		.send({from: address}, (error: any, hash: any) => {
+		.send({from: AppData.address}, (error: any, hash: any) => {
 			console.log(hash);
 		})
 		.on('error', function(error: any){ 

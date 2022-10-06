@@ -7,11 +7,11 @@ import {
   DrawerContent,
   DrawerCloseButton, useDisclosure, Switch
 } from '@chakra-ui/react'
-
+import tronWeb from 'tronweb';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { FaBars } from 'react-icons/fa';
 import { BsMoonFill, BsSunFill } from 'react-icons/bs';
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -19,16 +19,19 @@ import { useAccount } from 'wagmi'
 import '../styles/Home.module.css'
 import darklogo from '../public/dark_logo.svg'
 import lightlogo from '../public/light_logo.svg'
+import ConnectOptModal from './modals/ConnectOptModal';
+import { appContext } from '../pages/app'
 function newapp() {
-  const { address, isConnecting, isConnected, isDisconnected } = useAccount()
+  const AppData = useContext(appContext)
   const router = useRouter();
   const { toggleColorMode } = useColorMode();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <>
       <Flex justify={"space-between"} alignItems={"center"}>
-        <Box>
+        <Box cursor={"pointer"}>
           <Image onClick={()=>{
             router.push("/")
           }} src={colorMode == "dark" ? darklogo : lightlogo} alt="" width="100px" height="100px" />
@@ -39,24 +42,24 @@ function newapp() {
           <UnorderedList display={"flex"} alignItems="center" justifyContent={"space-around"} minWidth="20rem" listStyleType="none">
 
             <ListItem mx="1rem">
-              <Link href="/dashboard">
-                <Text my="1rem" cursor={"pointer"} onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
-                  Dashboard
+              <Link href="/">
+                <Text className={router.pathname=="/" ? "link_active":""} my="1rem" cursor={"pointer"} onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                  Home
                 </Text>
               </Link>
             </ListItem>
             <ListItem mx="1rem">
-              <Link href={address ? "/portfolio" : "/"}  >
-                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
-                  Portfolio
+              <Link href={AppData.address ? "/app" : "/"}  >
+                <Text  className={router.pathname=="/app" ? "link_active":""} cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                  App
                 </Text>
               </Link>
             </ListItem>
             <ListItem mx="1rem">
-              <Button width={"3rem"} onClick={toggleColorMode} mr={5}> {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />}</Button>
+              <Button width={"3rem"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />}</Button>
             </ListItem>
-            <ListItem mx="1rem">
-              <ConnectButton />
+            <ListItem ml="1.1rem" w= {AppData.address ? "15rem":"8rem"}>          
+           {AppData.address ?  <ConnectButton/>  :AppData.Taddress ? <Text bg="gray.600" onClick={()=>{AppData.setTaddress("")}}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"xs"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal  />}
             </ListItem>
           </UnorderedList>
         </Box>
@@ -66,42 +69,39 @@ function newapp() {
           <FaBars size={35} onClick={onOpen} />
         </Box>
 
-
       </Flex>
       <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent alignItems={"center"}>
+        <DrawerContent alignItems={"stretch"}>
           <DrawerHeader borderBottomWidth='1px'>
-            <Flex alignItems={"center"}>
+            <Flex alignItems={"center"} justifyContent="center">
               <Image src={colorMode == "dark" ? darklogo : lightlogo} alt="" width="100px" height="100px" />
             </Flex>
-
-            <Box mt="1rem" minWidth={"100%"}>
+            <Box mt="0.5rem" minWidth={"100%"}>
             </Box>
           </DrawerHeader>
           <DrawerBody>
-
             <nav >
-              <UnorderedList display={"flex"} flexDirection="column" alignItems="center" justifyContent={"center"} listStyleType="none">
-                <ListItem>
-                  <Link href="/dashboard">
-                    <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontSize={"2xl"} fontWeight={"bold"}>
-                      Dashboard
-                    </Text>
-                  </Link>
+              <UnorderedList display={"flex"} flexDirection="column" alignItems={"strech"} justifyContent={"center"} listStyleType="none">
+              <ListItem my="0.5rem">
+              <Link href="/">
+                <Button variant={"outline"} w="100%"  className={router.pathname=="/" ? "sidebar_link_active ":""} fontSize="2xl" my="0.5rem" cursor={"pointer"} onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                  Home
+                </Button>
+              </Link>
+            </ListItem>
+            <ListItem my="0.5rem">
+              <Link href={AppData.address ? "/app" : "/"}  >
+                <Button variant={"outline"} w="100%"  className={router.pathname=="/app" ? "sidebar_link_active ":""} fontSize="2xl" cursor={"pointer"} my="0.5rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                  App
+                </Button>
+              </Link>
+            </ListItem >
+                <ListItem my="0.5rem">
+                  <Button variant={"outline"} width={"100%"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
                 </ListItem>
-                <ListItem>
-                  <Link href="/portfolio"   >
-                    <Text cursor={"pointer"} onClick={onClose} my="1rem" fontFamily="Roboto" fontSize={"2xl"} fontWeight={"bold"}>
-                      Portfolio
-                    </Text>
-                  </Link>
-                </ListItem>
-                <ListItem>
-                  <Button variant={"outline"} width={"11rem"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
-                </ListItem>
-                <ListItem my="1rem">
-                  <ConnectButton.Custom>
+                <ListItem my="0.5rem">
+                {AppData.address ?   <ConnectButton.Custom>
                     {({
                       account,
                       chain,
@@ -125,22 +125,22 @@ function newapp() {
                           {(() => {
                             if (!mounted || !account || !chain) {
                               return (
-                                <Button onClick={() => {
+                                <Button fontFamily={"basement"} onClick={
                                   openConnectModal
-                                }} type="button" mr="0.3rem" borderRadius={"50px"} height="3rem">
-                                  Connect Wallet
+                                } type="button" mr="0.3rem" w="100%" height={"3rem"} fontSize="xl">
+                              ETHEREUM
                                 </Button>
                               );
                             }
                             return (
 
-                              <Box p="0.5rem" display={"flex"} justifyContent="center" alignItems="baseline" borderRadius="20px" backgroundColor={"gray.600"} height="3rem" border="1px solid #114D80" color="#B7C1C9" >
+                              <Box  borderRadius={"5px"} p="0.5rem" display={"flex"} justifyContent="center" alignItems="baseline"  backgroundColor={"gray.600"} height="3rem" border="1px solid #114D80"  >
 
                                 <Text ml="8px" fontFamily="Roboto" fontSize={"md"} mr={"3"} fontWeight="bold">{account.displayBalance
                                   ? `${account.displayBalance}`
                                   : ''}</Text>
 
-                                <Button size={"xs"} color={colorMode == "dark" ?"#FFFFF" : "#171717"} fontFamily="Poppins" fontSize={"xl"}  onClick={openAccountModal} mt="3px" mr="2px" type="button" borderRadius={"20px"}>
+                                <Button size={"xs"} color={colorMode == "dark" ?"#FFFFF" : "#171717"} fontFamily="Poppins" fontSize={"xl"}  onClick={openAccountModal} mt="3px" mr="2px" type="button" >
                                   {account.displayName}
 
                                 </Button>
@@ -150,11 +150,10 @@ function newapp() {
                         </div>
                       );
                     }}
-                  </ConnectButton.Custom>
+                  </ConnectButton.Custom> :AppData.Taddress ?<Text bg="gray.600"  onClick={()=>{AppData.setTaddress("")}}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"xs"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal />}
                 </ListItem>
               </UnorderedList>
             </nav>
-
           </DrawerBody>
         </DrawerContent>
       </Drawer>

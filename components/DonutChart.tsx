@@ -4,6 +4,11 @@ import { Chart, ArcElement, Legend } from 'chart.js'
 Chart.register(ArcElement);
 
 export default function DonutChart({available_to_Borrow,CollateralBalance,BorrowBalance}){
+ 
+ if(available_to_Borrow==0,CollateralBalance==0,BorrowBalance==0){
+  available_to_Borrow=1,CollateralBalance=1,BorrowBalance=1
+ }
+ 
   const data = {
     labels: [
       'Red',
