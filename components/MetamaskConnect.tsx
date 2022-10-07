@@ -13,9 +13,9 @@ function MetamaskConnect() {
     <>
 
 
-      <Box my="auto" height="auto" mx="auto" backgroundColor={"#242b3a"} borderRadius="10px">
+      <Box my="auto" height="auto" mx="auto" backgroundColor={colorMode == "light" ?  "gray.100" : "#242b3a"}  borderRadius="10px">
         <Box py="5rem"  px="1rem">
-          <Text fontSize={"2xl"} fontFamily={"Roboto"} textAlign={"center"} color={"orange.500"}> You are not Connected to Wallet!!! </Text>
+          <Text fontSize={"2xl"} fontFamily={"Satoshi"}  fontWeight="bolder" textAlign={"center"} color={"red"}> You are not Connected to Wallet !!! </Text>
          
           {/* <Box>
               

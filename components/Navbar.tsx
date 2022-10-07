@@ -7,6 +7,17 @@ import {
   DrawerContent,
   DrawerCloseButton, useDisclosure, Switch
 } from '@chakra-ui/react'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,Portal
+} from '@chakra-ui/react'
 import tronWeb from 'tronweb';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { FaBars } from 'react-icons/fa';
@@ -22,12 +33,13 @@ import lightlogo from '../public/light_logo.svg'
 import ConnectOptModal from './modals/ConnectOptModal';
 import { appContext } from '../pages/app'
 function newapp() {
+  const initRef = React.useRef()
+
   const AppData = useContext(appContext)
   const router = useRouter();
   const { toggleColorMode } = useColorMode();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   return (
     <>
       <Flex justify={"space-between"} alignItems={"center"}>
@@ -59,7 +71,26 @@ function newapp() {
               <Button width={"3rem"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />}</Button>
             </ListItem>
             <ListItem ml="1.1rem" w= {AppData.address ? "15rem":"8rem"}>          
-           {AppData.address ?  <ConnectButton/>  :AppData.Taddress ? <Text bg="gray.600" onClick={()=>{AppData.setTaddress("")}}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"xs"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal  />}
+           {AppData.address ?  <ConnectButton/>  
+           :AppData.Taddress ? 
+            <Popover placement='auto'>
+            <PopoverTrigger>
+              <Button minWidth="100%"> <Text   minWidth="6rem"  fontFamily={"basement"}  height="2.5rem"  pt="0.9rem"  fontSize={"xs"} fontWeight={"bold"} borderRadius={"5px"}  whiteSpace={"nowrap"} overflow="hidden" width={"3rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text></Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader fontWeight='semibold'>Do you want to disconnect ??</PopoverHeader>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody display={"flex"} alignItems="center" justifyContent={"space-around"}>
+              <Button  variant="outline" border={"2px solid gray"}   onClick={onClose}> cancel</Button>
+              <Button variant="solid" width="5rem" onClick={ ()=>{AppData.setTaddress("")}}> Yes</Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+
+
+         
+         : <ConnectOptModal  />}
             </ListItem>
           </UnorderedList>
         </Box>
@@ -150,7 +181,9 @@ function newapp() {
                         </div>
                       );
                     }}
-                  </ConnectButton.Custom> :AppData.Taddress ?<Text bg="gray.600"  onClick={()=>{AppData.setTaddress("")}}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"xs"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal />}
+                  </ConnectButton.Custom> :AppData.Taddress ?<Text bg="gray.300"  onClick={isOpen}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"md"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal />}
+
+              
                 </ListItem>
               </UnorderedList>
             </nav>

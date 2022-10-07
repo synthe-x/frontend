@@ -3,63 +3,63 @@
     "AddressResolver": {
       "source": "AddressResolver",
       "constructorArguments": [],
-      "address": "TBRach6Ainm6UZ7Jxt1xjEzYq81dYY9LV3"
+      "address": "TYQABzyhU4cu9f2UozpxMebD8zKWgU2zKN"
     },
     "System": {
       "source": "System",
       "constructorArguments": [
-        "TBRach6Ainm6UZ7Jxt1xjEzYq81dYY9LV3"
+        "TYQABzyhU4cu9f2UozpxMebD8zKWgU2zKN"
       ],
-      "address": "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+      "address": "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
     },
     "Reserve": {
       "source": "Reserve",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TG41Xqrwk3CYbn9YUA7tmDMc2BLQqgjXyQ"
+      "address": "TC65XZhJKUvwvJzX5KUB7whNCERjsMVDNr"
     },
     "Exchanger": {
       "source": "Exchanger",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TG868erT4icFrVtyLeszny4r8nHxYzpnRW"
+      "address": "TL4SEXdUBECKyU55yckspaXyWAYJxbmRbX"
     },
     "DebtManager": {
       "source": "DebtManager",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TX6sEZAKbypNc5CtsoGkTPaUsSoLzTg2P7"
+      "address": "TSrM9ZJaYo3ZUCacoS8Pr6MARuAxjNQLbG"
     },
     "CollateralManager": {
       "source": "CollateralManager",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TGsyzAF79DxBVXtNkXCtGh9Dt3q7iRUUaA"
+      "address": "TD2yU6yuw23cCwC9sFgnzSnSXNbyYSiwKg"
     },
     "Helper": {
       "source": "Helper",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TJxwtt4A4idPi9WkA9RrDVtS2RRW3EwEgV"
+      "address": "TLNEu2AUGxNkk9BAjXG1NtCtkdZxmCPEZN"
     },
     "FixedInterestRate": {
       "source": "FixedInterestRate",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TYuTAoWFDqgzUzqiqGfmo83ekcre3KgZvR"
+      "address": "THwDmwnB114M6sMwu3budbEbTYJpdTNYdN"
     },
     "Liquidator": {
       "source": "Liquidator",
       "constructorArguments": [
-        "TV3aZji2JMaz7xwmj2pbAVi2hsM2q9KAFQ"
+        "TMJbrLktN6tjbk1ynmY3LnVxajvD6oaCu4"
       ],
-      "address": "TGo3pGuHg3vdsr9DtWkGSro1PoRTbVmPLC"
+      "address": "TLwSiiafpyADBhs8zuBnRaCbm8m6AhJS45"
     },
     "SynthexCollateralizedTron": {
       "source": "CollateralERC20",
@@ -73,17 +73,17 @@
           "hex": "0x016345785d8a0000"
         }
       ],
-      "address": "TCqPaG5zP2rK5vfgzAHzthsqa9bWZguQhs"
+      "address": "TDuK6s2V3YqhhBEAfVYBcbQjFv3p7b8R36"
     },
     "SynthexUSD": {
       "source": "SynthERC20",
       "constructorArguments": [
         "Synthex USD",
         "sxUSD",
-        "4196938a604630ac97a620efbb4f0ea8f75fa255eb",
-        "41fb950e57a7345af1a9aa74250bd29a689070db99"
+        "41f92f3f0eed09f743b07bdb747d6e003f808221a9",
+        "415760d20392039e24b80b147778aed943b741329f"
       ],
-      "address": "TMwxiJdK2pZRPDCbMPH4W71bVGncxhVxz3"
+      "address": "TFapXL1qJrM8ukEevQsJ9seKs8bgbdwtX6"
     },
     "SynthexBitcoin": {
       "source": "SynthERC20",
@@ -91,9 +91,9 @@
         "Synthex Bitcoin",
         "sxBTC",
         "TYY5GdNvHN8NVY6MYtgEPwx15pyUmLEw5J",
-        "41fb950e57a7345af1a9aa74250bd29a689070db99"
+        "415760d20392039e24b80b147778aed943b741329f"
       ],
-      "address": "TPYFxixn1om2n5udkjGTYRV6qgzHG2MMqa"
+      "address": "TTWXZnRhr1FuqQbKXPQerqZ6gH843FbnA6"
     },
     "SynthexJust": {
       "source": "SynthERC20",
@@ -101,9 +101,9 @@
         "Synthex Just",
         "sxJST",
         "TYr8nvS9BUbi9eLXNQpUMbxdvwYpoWn3ho",
-        "41fb950e57a7345af1a9aa74250bd29a689070db99"
+        "415760d20392039e24b80b147778aed943b741329f"
       ],
-      "address": "TJMUVScjDN64WnNw3qWRPkFDn1HeKXbbM9"
+      "address": "TQNJPzWGp5qHATrRA8z3gEpggAxAdQDeHJ"
     },
     "SynthexDice": {
       "source": "SynthERC20",
@@ -111,16 +111,16 @@
         "Synthex Dice",
         "sxDICE",
         "TS8fAMLNnbWgNyXz6queFHR7HfZkhAeppK",
-        "41fb950e57a7345af1a9aa74250bd29a689070db99"
+        "415760d20392039e24b80b147778aed943b741329f"
       ],
-      "address": "TU4ARZW4EJBtiBRJvMAgqAYXihvky8LyN7"
+      "address": "TG1JLp25P23v5BkbFSX32awmncJTjocDXw"
     },
     "ReservePool0": {
       "source": "ReservePool",
       "constructorArguments": [
-        "41d13e0dd123371325d95a35c70f54a5af1fbbaf4c"
+        "417c545c617a18efce10578cd5780154d3760ffdd4"
       ],
-      "address": "TNjQfKJvezj8LbGM7mcs7fo67dMwuTqnig"
+      "address": "TARPZg3fgYNydYASPAk6czY7F4mtRk6YrZ"
     }
   },
   "sources": {

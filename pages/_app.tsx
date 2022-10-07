@@ -54,11 +54,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()}>
-        <Flex justify={"center"} flexDirection={{sm:"column",md:"row"}}>
-        <Box maxWidth={"1300px"} minWidth="100%">
+        <Box maxWidth={"1300px"} margin="auto">
+        <Box >
         <Component {...pageProps} />
         </Box>
-        </Flex>
+        </Box>
         <Footer/>
       </RainbowKitProvider>
     </WagmiConfig>

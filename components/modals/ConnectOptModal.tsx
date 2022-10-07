@@ -10,7 +10,7 @@ import {
 	InputRightElement,
 	InputGroup,Spinner,Link,useColorMode
 } from '@chakra-ui/react';
-
+import tronWeb from 'tronweb';
 import {
 	Modal,
 	ModalOverlay,
@@ -24,9 +24,29 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { appContext } from '../../pages/app'
 const ConnectOptModal = () => {
+  const[Taddress, setTaddress]= useState("")
+  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
   const AppData = useContext(appContext)
     const { colorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+
+    function TronConnect(){
+		  if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+			setTaddress(window.tronWeb.defaultAddress.base58)
+			
+		}
+}
+	
+    const handleTronConnect = () => {
+      TronConnect()
+    }
+    if(Taddress){
+      AppData.fetch(Taddress);
+     }
+    if(isConnected){
+      AppData.fetch(address);
+     }
     return (
         <Box>
             <Button variant="outline" width={"100%"} fontFamily={"basement"} onClick={onOpen}  aria-label={''} >Connect 
@@ -62,7 +82,8 @@ const ConnectOptModal = () => {
                             if (!mounted || !account || !chain) {
                               return (
                                 <Button fontFamily={"basement"} onClick={()=>{
-                                  openConnectModal();AppData.fetch()
+                           openConnectModal()  ;
+                          
                                 } }
                                  type="button" mr="0.3rem" w="100%" height={"3rem"} fontSize="xl">
                               ETHEREUM
@@ -89,7 +110,7 @@ const ConnectOptModal = () => {
                     }}
                   </ConnectButton.Custom>
 <Text textAlign={"center"} fontSize={"2xl"} color="#B7C1C9"  fontFamily={"Satoshi"}>OR</Text>
-<Button onClick={()=>{AppData.TronConnect();AppData.fetch()}} w="100%" height={"3rem"} fontSize="xl" fontFamily={"basement"}>TRON</Button>
+<Button onClick={handleTronConnect} w="100%" height={"3rem"} fontSize="xl" fontFamily={"basement"}>TRON</Button>
                     </ModalBody>
                 </ModalContent>
             </Modal>
