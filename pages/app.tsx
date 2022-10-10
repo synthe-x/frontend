@@ -12,74 +12,78 @@ import Chart from '../components/DonutChart';
 export const appContext = createContext(1);
 
 function App() {
-
+	const[Taddress, setTaddress]= useState("")
+	const { address, isConnecting, isConnected, isDisconnected } = useAccount();
 	const { colorMode } = useColorMode();
 	const [CollateralAssets, setCollateralAssets] = useState([]);
 	const [IssuanceAssets, setIssuanceAssets] = useState([]);
 	const [BorrowBalance, setBorrowBalance] = useState(0);
-	const [address, setaddress] = useState("");
-	const [Taddress, setTaddress] = useState("");
 	const [CollateralBalance, setCollateralBalance] = useState(0);
 	const [minCRatio, setMinCRatio] = useState(0)
 
+	function TronConnect(){
+		if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+		  setTaddress(window.tronWeb.defaultAddress.base58)
+		  
+	  }
 
+	// const fetch = (Taddress, address) => {
+	// 	console.log("address", address,Taddress)
+	// 	setaddress(address)
+	// 	setTaddress(Taddress)
+		// if (address) {
+		// console.log(address)
+		// let helper = getContract('Helper', "goerli");
+		// helper.methods
+		// 	.getUserPosition(address)
+		// 	.call({ from: address })
+		// 	.then((res) => {
+		// 		setCollateralAssets(res['collaterals']);
+		// 		setIssuanceAssets(res['debts']);
+		// 		setCollateralBalance(res['collateralBalance']);
+		// 		setBorrowBalance(res['debtBalance']);
+		// 	});
 
-	const fetch = (Taddress,address) => {
-		setaddress(address)
-		setTaddress(Taddress)
-		if (address) {
-			// console.log(address)
-			// let helper = getContract('Helper', "goerli");
-			// helper.methods
-			// 	.getUserPosition(address)
-			// 	.call({ from: address })
-			// 	.then((res) => {
-			// 		setCollateralAssets(res['collaterals']);
-			// 		setIssuanceAssets(res['debts']);
-			// 		setCollateralBalance(res['collateralBalance']);
-			// 		setBorrowBalance(res['debtBalance']);
-			// 	});
-
-			// let reserve = getContract('Reserve', "goerli")
-			// reserve.methods
-			// ['minCRatio']()
-			// 	.call()
-			// 	.then((res) => {
-			// 		// console.log(res);
-			// 		setMinCRatio(res);
-			// 	});
-		}
-		else if (Taddress) {
-			console.log("Taddress", Taddress)
-			// let helper = getContract('Helper', "tron");
-			// helper.methods
-			// 	.getUserPosition(Taddress)
-			// 	.call({ from: Taddress })
-			// 	.then((res) => {
-			// 		setCollateralAssets(res['collaterals']);
-			// 		setIssuanceAssets(res['debts']);
-			// 		setCollateralBalance(res['collateralBalance']);
-			// 		setBorrowBalance(res['debtBalance']);
-			// 	})
-			// 	.catch((err) => {
-			// 		console.log("logged error", err);
-			// 	})
-			let reserve = getContract('Reserve', "tron")
-			reserve.methods
-			['minCRatio']()
-				.call()
-				.then((res) => {
-					console.log(res)
-					setMinCRatio(res);
-				});
-		}
+		// let reserve = getContract('Reserve', "goerli")
+		// reserve.methods
+		// ['minCRatio']()
+		// 	.call()
+		// 	.then((res) => {
+		// 		// console.log(res);
+		// 		setMinCRatio(res);
+		// 	});
+		// }
+		// else if (Taddress) {
+		// 	console.log("Taddress", Taddress)
+		// let helper = getContract('Helper', "tron");
+		// helper.methods
+		// 	.getUserPosition(Taddress)
+		// 	.call({ from: Taddress })
+		// 	.then((res) => {
+		// 		setCollateralAssets(res['collaterals']);
+		// 		setIssuanceAssets(res['debts']);
+		// 		setCollateralBalance(res['collateralBalance']);
+		// 		setBorrowBalance(res['debtBalance']);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log("logged error", err);
+		// 	})
+		// let reserve = getContract('Reserve', "tron")
+		// reserve.methods
+		// ['minCRatio']()
+		// 	.call()
+		// 	.then((res) => {
+		// 		console.log(res)
+		// 		setMinCRatio(res);
+		// 	});
+	// }
 	}
 
 	let limit_to_Borrow = CollateralBalance / (1.5)
 	let available_to_Borrow = limit_to_Borrow - BorrowBalance;
 	return (
 		<>
-			<appContext.Provider value={{ fetch, address, Taddress, setTaddress }}>
+			<appContext.Provider value={{ TronConnect, address, Taddress, setTaddress }}>
 				<Navbar />
 				{address || Taddress ? <Box width="auto">
 					<Flex flexDirection={{ sm: 'column', lg: 'row' }}

@@ -26,14 +26,15 @@ import React, { useState,useContext } from 'react'
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useAccount } from 'wagmi'
 import '../styles/Home.module.css'
 import darklogo from '../public/dark_logo.svg'
 import lightlogo from '../public/light_logo.svg'
 import ConnectOptModal from './modals/ConnectOptModal';
 import { appContext } from '../pages/app'
+import { useAccount } from 'wagmi';
 function newapp() {
   const initRef = React.useRef()
+  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
 
   const AppData = useContext(appContext)
   const router = useRouter();
@@ -51,27 +52,55 @@ function newapp() {
         </Box>
 
 
-        <Box display={{ sm: "none", md: "block" }}>
+        <Box display={{ sm: "none", md: "none",lg:"block" }}>
           <UnorderedList display={"flex"} alignItems="center" justifyContent={"space-around"} minWidth="20rem" listStyleType="none">
 
-            <ListItem mx="1rem">
+            {/* <ListItem mx="1rem">
               <Link href="/">
                 <Text className={router.pathname=="/" ? "link_active":""} my="1rem" cursor={"pointer"} onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
                   Home
                 </Text>
               </Link>
+            </ListItem> */}
+            <ListItem mx="1rem">
+              <Link href="/app" >
+                <Text  cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                  App
+                </Text>
+              </Link>
             </ListItem>
             <ListItem mx="1rem">
-              <Link href={AppData.address ? "/app" : "/"}  >
-                <Text  className={router.pathname=="/app" ? "link_active":""} cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
-                  App
+              <Link href="/ Convert">
+                <Text   cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                 Convert
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/basictrading"  >
+                <Text   cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                Basic Trading
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/market" >
+                <Text   cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                 Market
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/margintrading">
+                <Text   cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+         Margin Trading
                 </Text>
               </Link>
             </ListItem>
             <ListItem mx="1rem">
               <Button width={"3rem"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />}</Button>
             </ListItem>
-            <ListItem ml="1.1rem" w= {AppData.address ? "15rem":"8rem"}>          
+            <ListItem ml="1.1rem" w="10rem">          
            {AppData.address ? 
             <ConnectButton/>:AppData.Taddress ?
             <> <Menu >
@@ -80,7 +109,7 @@ function newapp() {
             </MenuButton>
             <MenuList>
               <MenuItem fontFamily={"satoshi"} onClick={()=>{
-             AppData.setTaddress("")
+             AppData.setTaddress("");
               }} >
             Disconnect
               </MenuItem>
@@ -93,7 +122,7 @@ function newapp() {
         </Box>
 
 
-        <Box display={{ sm: "block", md: "none", lg: "none" }}>
+        <Box display={{ sm: "block", lg: "none" }}>
           <FaBars size={35} onClick={onOpen} />
         </Box>
 
@@ -111,20 +140,48 @@ function newapp() {
           <DrawerBody>
             <nav >
               <UnorderedList display={"flex"} flexDirection="column" alignItems={"strech"} justifyContent={"center"} listStyleType="none">
-              <ListItem my="0.5rem">
+              {/* <ListItem my="0.5rem">
               <Link href="/">
                 <Button variant={"outline"} w="100%"  className={router.pathname=="/" ? "sidebar_link_active ":""} fontSize="2xl" my="0.5rem" cursor={"pointer"} onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
                   Home
                 </Button>
               </Link>
-            </ListItem>
-            <ListItem my="0.5rem">
-              <Link href={AppData.address ? "/app" : "/"}  >
-                <Button variant={"outline"} w="100%"  className={router.pathname=="/app" ? "sidebar_link_active ":""} fontSize="2xl" cursor={"pointer"} my="0.5rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+            </ListItem> */}
+            <ListItem mx="1rem">
+              <Link href="/app" >
+                <Text   cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
                   App
-                </Button>
+                </Text>
               </Link>
-            </ListItem >
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/ Convert">
+                <Text  cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                 Convert
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/basictrading"  >
+                <Text  cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                Basic Trading
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/market" >
+                <Text  cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+                 Market
+                </Text>
+              </Link>
+            </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/margintrading">
+                <Text  cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="Roboto" fontWeight={"bold"}>
+         Margin Trading
+                </Text>
+              </Link>
+            </ListItem>
                 <ListItem my="0.5rem">
                   <Button variant={"outline"} width={"100%"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
                 </ListItem>
@@ -185,7 +242,9 @@ function newapp() {
            </MenuButton>
            <MenuList width={"8rem"}>
              <MenuItem fontFamily={"satoshi"} onClick={()=>{
-            AppData.setTaddress("")
+            AppData.setTaddress("");
+           
+
              }} >
            Disconnect
              </MenuItem>

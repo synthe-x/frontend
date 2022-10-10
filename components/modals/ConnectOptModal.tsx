@@ -23,33 +23,15 @@ import {
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { appContext } from '../../pages/app'
-import ETHER from '../../public/ether.svg'
+import ETHER from '../../public/ether.png'
 import TRON from '../../public/tron.svg'
 import Image from 'next/image';
 const ConnectOptModal = () => {
-  const[Taddress, setTaddress]= useState("")
-  const { address, isConnecting, isConnected, isDisconnected } = useAccount();
   const AppData = useContext(appContext)
     const { colorMode } = useColorMode();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure(); 
 
 
-    function TronConnect(){
-		  if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
-			setTaddress(window.tronWeb.defaultAddress.base58)
-			
-		}
-}
-	
-    const handleTronConnect = () => {
-      TronConnect();
-    }
-    if(Taddress){
-      AppData.fetch(Taddress);
-     }
-    if(isConnected){
-      AppData.fetch(address);
-     }
     return (
         <Box>
             <Button variant="outline" width={"100%"} fontFamily={"basement"} onClick={onOpen}  aria-label={''} >Connect 
@@ -86,7 +68,7 @@ const ConnectOptModal = () => {
                           {(() => {
                             if (!mounted || !account || !chain) {
                               return (
-                                <Box w="8rem" onClick={openConnectModal} h="8rem" bg="#1E1E1E" borderRadius={"8px"} cursor="pointer">
+                                <Box w="8rem" _hover={{ transform:" scale(0.98)"}} onClick={openConnectModal} h="8rem" bg="#FFFFFF" borderRadius={"8px"} cursor="pointer">
                                 <Image src={ETHER} alt="" className='ether_for_connect' />
                                 </Box>
                               );
@@ -111,7 +93,7 @@ const ConnectOptModal = () => {
                     }}
                   </ConnectButton.Custom> 
                  
-                    <Box cursor="pointer"  onClick={handleTronConnect} w="8rem" h="8rem"  bg="#FF060A" borderRadius={"8px"}>
+                    <Box cursor="pointer"   _hover={{ transform:" scale(0.98)"}} onClick={AppData.TronConnect} w="8rem" h="8rem"  bg="#FF060A" borderRadius={"8px"}>
                     <Image  src={TRON} alt="" className='tron_for_connect' />
                     </Box>
                    </Flex>
