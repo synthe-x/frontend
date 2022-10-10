@@ -5,19 +5,19 @@ import {
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton, useDisclosure, Switch
+  DrawerCloseButton, useDisclosure, Select,
 } from '@chakra-ui/react'
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,Portal
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
 } from '@chakra-ui/react'
+import { MdKeyboardArrowDown } from 'react-icons/md';
 import tronWeb from 'tronweb';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { FaBars } from 'react-icons/fa';
@@ -40,6 +40,7 @@ function newapp() {
   const { toggleColorMode } = useColorMode();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  console.log("AppData",AppData.address)
   return (
     <>
       <Flex justify={"space-between"} alignItems={"center"}>
@@ -71,25 +72,21 @@ function newapp() {
               <Button width={"3rem"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />}</Button>
             </ListItem>
             <ListItem ml="1.1rem" w= {AppData.address ? "15rem":"8rem"}>          
-           {AppData.address ?  <ConnectButton/>  
-           :AppData.Taddress ? 
-            <Popover placement='auto'>
-            <PopoverTrigger>
-              <Button minWidth="100%"> <Text   minWidth="6rem"  fontFamily={"basement"}  height="2.5rem"  pt="0.9rem"  fontSize={"xs"} fontWeight={"bold"} borderRadius={"5px"}  whiteSpace={"nowrap"} overflow="hidden" width={"3rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text></Button>
-            </PopoverTrigger>
-            <PopoverContent>
-              <PopoverHeader fontWeight='semibold'>Do you want to disconnect ??</PopoverHeader>
-              <PopoverArrow />
-              <PopoverCloseButton />
-              <PopoverBody display={"flex"} alignItems="center" justifyContent={"space-around"}>
-              <Button  variant="outline" border={"2px solid gray"}   onClick={onClose}> cancel</Button>
-              <Button variant="solid" width="5rem" onClick={ ()=>{AppData.setTaddress("")}}> Yes</Button>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
-
-
-         
+           {AppData.address ? 
+            <ConnectButton/>:AppData.Taddress ?
+            <> <Menu >
+            <MenuButton as={Button} maxW="8rem" rightIcon={<MdKeyboardArrowDown />}>
+              <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{AppData.Taddress}</Text> 
+            </MenuButton>
+            <MenuList>
+              <MenuItem fontFamily={"satoshi"} onClick={()=>{
+             AppData.setTaddress("")
+              }} >
+            Disconnect
+              </MenuItem>
+            </MenuList>
+          </Menu> </> 
+          
          : <ConnectOptModal  />}
             </ListItem>
           </UnorderedList>
@@ -132,7 +129,8 @@ function newapp() {
                   <Button variant={"outline"} width={"100%"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
                 </ListItem>
                 <ListItem my="0.5rem">
-                {AppData.address ?   <ConnectButton.Custom>
+                {AppData.address ? 
+                  <ConnectButton.Custom>
                     {({
                       account,
                       chain,
@@ -181,9 +179,18 @@ function newapp() {
                         </div>
                       );
                     }}
-                  </ConnectButton.Custom> :AppData.Taddress ?<Text bg="gray.300"  onClick={isOpen}  fontFamily={"basement"} minWidth="100%" height="2.5rem" border={"2px solid gray"} pt="0.5rem" px="0.5rem" fontSize={"md"} fontWeight={"bold"} borderRadius={"5PX"}  whiteSpace={"nowrap"} overflow="hidden" width={"6rem"} textOverflow={"ellipsis"}>{AppData.Taddress}</Text>: <ConnectOptModal />}
-
-              
+                  </ConnectButton.Custom> :AppData.Taddress ? <Menu >
+           <MenuButton as={Button} maxW="100%" rightIcon={<MdKeyboardArrowDown />}>
+             <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{AppData.Taddress}</Text> 
+           </MenuButton>
+           <MenuList width={"8rem"}>
+             <MenuItem fontFamily={"satoshi"} onClick={()=>{
+            AppData.setTaddress("")
+             }} >
+           Disconnect
+             </MenuItem>
+           </MenuList>
+         </Menu>: <ConnectOptModal />}
                 </ListItem>
               </UnorderedList>
             </nav>

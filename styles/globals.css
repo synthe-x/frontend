@@ -83,3 +83,9 @@ a {
   border-left: 5px solid green;
   padding-left: 0.3rem;
 }
+.ether_for_connect{
+  transform: scale(0.7);
+}
+.tron_for_connect{
+  transform: scale(0.6);
+}

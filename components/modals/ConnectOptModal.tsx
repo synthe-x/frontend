@@ -23,6 +23,9 @@ import {
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { appContext } from '../../pages/app'
+import ETHER from '../../public/ether.svg'
+import TRON from '../../public/tron.svg'
+import Image from 'next/image';
 const ConnectOptModal = () => {
   const[Taddress, setTaddress]= useState("")
   const { address, isConnecting, isConnected, isDisconnected } = useAccount();
@@ -39,7 +42,7 @@ const ConnectOptModal = () => {
 }
 	
     const handleTronConnect = () => {
-      TronConnect()
+      TronConnect();
     }
     if(Taddress){
       AppData.fetch(Taddress);
@@ -51,13 +54,15 @@ const ConnectOptModal = () => {
         <Box>
             <Button variant="outline" width={"100%"} fontFamily={"basement"} onClick={onOpen}  aria-label={''} >Connect 
             </Button>
-            <Modal isCentered isOpen={isOpen} onClose={onClose}>
+            <Modal isCentered isOpen={isOpen} onClose={onClose}  >
                 <ModalOverlay />
-                <ModalContent width={'30rem'} height="15rem">
+                <ModalContent width={'30rem'} height="16rem"  bg="#111111" >
                     <ModalCloseButton />
                     <ModalHeader fontFamily={"Satoshi"}>Connect with</ModalHeader>
                     <ModalBody>
-                    <ConnectButton.Custom>
+                   
+                   <Flex alignItems={"center"} justifyContent="space-around">
+                   <ConnectButton.Custom>
                     {({
                       account,
                       chain,
@@ -81,13 +86,9 @@ const ConnectOptModal = () => {
                           {(() => {
                             if (!mounted || !account || !chain) {
                               return (
-                                <Button fontFamily={"basement"} onClick={()=>{
-                           openConnectModal()  ;
-                          
-                                } }
-                                 type="button" mr="0.3rem" w="100%" height={"3rem"} fontSize="xl">
-                              ETHEREUM
-                                </Button>
+                                <Box w="8rem" onClick={openConnectModal} h="8rem" bg="#1E1E1E" borderRadius={"8px"} cursor="pointer">
+                                <Image src={ETHER} alt="" className='ether_for_connect' />
+                                </Box>
                               );
                             }
                             return (
@@ -108,9 +109,14 @@ const ConnectOptModal = () => {
                         </div>
                       );
                     }}
-                  </ConnectButton.Custom>
-<Text textAlign={"center"} fontSize={"2xl"} color="#B7C1C9"  fontFamily={"Satoshi"}>OR</Text>
-<Button onClick={handleTronConnect} w="100%" height={"3rem"} fontSize="xl" fontFamily={"basement"}>TRON</Button>
+                  </ConnectButton.Custom> 
+                 
+                    <Box cursor="pointer"  onClick={handleTronConnect} w="8rem" h="8rem"  bg="#FF060A" borderRadius={"8px"}>
+                    <Image  src={TRON} alt="" className='tron_for_connect' />
+                    </Box>
+                   </Flex>
+                   
+                   
                     </ModalBody>
                 </ModalContent>
             </Modal>

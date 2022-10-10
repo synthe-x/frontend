@@ -24,7 +24,7 @@ function App() {
 
 
 
-	const fetch = (Taddress) => {
+	const fetch = (Taddress,address) => {
 		setaddress(address)
 		setTaddress(Taddress)
 		if (address) {
