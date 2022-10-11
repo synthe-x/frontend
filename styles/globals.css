@@ -123,4 +123,20 @@ a {
 #cripto_info_table_datarightBorderRadius{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+} 
+
+/************ recent transaction table ************/
+.Recent_trans_table_data {
+  text-align: center;
+}
+/************* funding asset table **************/
+.fund_asset_table_data {
+  text-align: center;
+}
+/* .cripto_info_table_rows:hover .fund_asset_table_data {
+  background-color: #dde0e0;
+} */
+.fund_asset_table_Head {
+  text-align: center;
+
 }

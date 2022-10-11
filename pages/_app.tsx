@@ -8,7 +8,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react'
 import Footer from '../components/Footer';
-
+import { mode } from "@chakra-ui/theme-tools";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -48,7 +48,16 @@ const breakpoints ={
   xl: "1440px",
   "2xl": "1680px"
 };
-const theme = extendTheme({ config,breakpoints })
+
+const styles = {
+  global: props => ({
+    body: {
+      // color: mode('gray.800', 'whiteAlpha.900')(props),
+      bg: mode('gray.100', '#141214')(props),
+    },
+  }),
+};
+const theme = extendTheme({ config,breakpoints,styles })
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
