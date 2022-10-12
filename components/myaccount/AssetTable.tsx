@@ -12,10 +12,10 @@
       TableContainer, Box, Text, Flex,useColorMode,
     } from '@chakra-ui/react'
 import {CgArrowsExchange} from 'react-icons/cg';
-    const FundingAssetTable = () => { 
+    const FundingAssetTable = ({data}) => { 
       const { colorMode } = useColorMode();
       const { isOpen, onOpen, onClose } = useDisclosure()
-
+console.log("data",data)
       return (
         <div>
           <Table variant='simple' mt="1rem">
@@ -28,22 +28,24 @@ import {CgArrowsExchange} from 'react-icons/cg';
               </Tr>
             </Thead>
             <Tbody>
-              {/* data repeted */}
-          <Tr>
+      {data ? data.map((asset)=>{
+        return(
+          <>
+           <Tr>
 <Td  className='fund_asset_table_data'> 
 <Flex alignItems={"center"}>
 <Image src="https://raw.githubusercontent.com/Chainscore/assets/main/BTC.png" alt='img' w="2rem" mr="0.2rem" />
-<Text ml="0.3rem" fontFamily="basement"  fontSize={"lg"}>BTC</Text> 
+<Text ml="0.3rem" fontFamily="basement"  fontSize={"lg"}>{asset.name}</Text> 
 </Flex> 
 
 </Td>
 <Td>
-<Text fontFamily="satoshi"  fontSize={"lg"}>$2,5551.644</Text>
-<Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>$9,435.04</Text>
+<Text fontFamily="satoshi"  fontSize={"lg"}>{asset.Balance}</Text>
+<Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>{asset.holdbalance}</Text>
 </Td>
 
 <Td className='fund_asset_table_data' fontSize={"xs"}> 
-<Text fontSize={"lg"}>67.05%</Text>
+<Text fontSize={"lg"}>{asset.percent}</Text>
 <Progress colorScheme='whatsapp' maxWidth={"5rem"} size='sm' value={20} />
 </Td>
 
@@ -52,75 +54,11 @@ import {CgArrowsExchange} from 'react-icons/cg';
 </Td>
 
           </Tr>
-          <Tr>
-<Td  className='fund_asset_table_data'> 
-<Flex alignItems={"center"}>
-<Image src="https://raw.githubusercontent.com/Chainscore/assets/main/BTC.png" alt='img' w="2rem" mr="0.2rem" />
-<Text ml="0.3rem" fontFamily="basement"  fontSize={"lg"}>BTC</Text> 
-</Flex> 
-
-</Td>
-<Td>
-<Text fontFamily="satoshi"  fontSize={"lg"}>$2,5551.644</Text>
-<Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>$9,435.04</Text>
-</Td>
-
-<Td className='fund_asset_table_data' fontSize={"xs"}> 
-<Text fontSize={"lg"}>67.05%</Text>
-<Progress colorScheme='whatsapp' maxWidth={"5rem"} size='sm' value={20} />
-</Td>
-
-<Td className='fund_asset_table_data'>
-    <CgArrowsExchange size={40}/>
-</Td>
-
-          </Tr>
-          <Tr>
-<Td  className='fund_asset_table_data'> 
-<Flex alignItems={"center"}>
-<Image src="https://raw.githubusercontent.com/Chainscore/assets/main/BTC.png" alt='img' w="2rem" mr="0.2rem" />
-<Text ml="0.3rem" fontFamily="basement"  fontSize={"lg"}>BTC</Text> 
-</Flex> 
-
-</Td>
-<Td>
-<Text fontFamily="satoshi"  fontSize={"lg"}>$2,5551.644</Text>
-<Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>$9,435.04</Text>
-</Td>
-
-<Td className='fund_asset_table_data' fontSize={"xs"}> 
-<Text fontSize={"lg"}>67.05%</Text>
-<Progress colorScheme='green' maxWidth={"5rem"} size='sm' value={20} />
-</Td>
-
-<Td className='fund_asset_table_data'>
-    <CgArrowsExchange size={40}/>
-</Td>
-
-          </Tr>
-          <Tr>
-<Td  className='fund_asset_table_data'> 
-<Flex alignItems={"center"}>
-<Image src="https://raw.githubusercontent.com/Chainscore/assets/main/BTC.png" alt='img' w="2rem" mr="0.2rem" />
-<Text ml="0.3rem" fontFamily="basement"  fontSize={"lg"}>BTC</Text> 
-</Flex> 
-
-</Td>
-<Td>
-<Text fontFamily="satoshi"  fontSize={"lg"}>$2,5551.644</Text>
-<Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>$9,435.04</Text>
-</Td>
-
-<Td className='fund_asset_table_data' fontSize={"xs"}> 
-<Text fontSize={"lg"}>67.05%</Text>
-<Progress colorScheme='green' maxWidth={"5rem"} size='sm' value={20} />
-</Td>
-
-<Td className='fund_asset_table_data'>
-    <CgArrowsExchange size={40}/>
-</Td>
-
-          </Tr>
+          </>
+        )
+      }) :""}
+         
+          
          
   
             </Tbody>

@@ -28,10 +28,8 @@ import TRON from '../../public/tron.svg'
 import Image from 'next/image';
 const ConnectOptModal = () => {
   const AppData = useContext(appContext)
-    const { colorMode } = useColorMode();
-    const { isOpen, onOpen, onClose } = useDisclosure(); 
-
-
+  const { colorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
     return (
         <Box>
             <Button variant="outline" width={"100%"} fontFamily={"basement"} onClick={onOpen}  aria-label={''} >Connect 

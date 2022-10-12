@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         </Box>
         </Box>
-        <Footer/>
+        {/* <Footer/> */}
       </RainbowKitProvider>
     </WagmiConfig>
     </ChakraProvider>

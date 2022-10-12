@@ -9,11 +9,11 @@ const BuySell = () => {
     <Container>
     <Box mt="0.7rem">
        <Text fontWeight={"satoshi"}> Price(USDT)</Text>
- <Input type='number' placeholder='place order with optimal price' />
+ <Input border={"2px solid gray"} type='number' placeholder='place order with optimal price' />
     </Box>
     <Box mt="0.7rem">
        <Text fontWeight={"satoshi"}> Total(USDT)</Text>
- <Input type='number' />
+ <Input type='number' border={"2px solid gray"} />
     </Box>
     <Text mt="1rem">coin Balance -- USDT</Text>
     <Text>Max buy -- BTC</Text>

@@ -28,36 +28,32 @@
               </Tr>
             </Thead>
             <Tbody>
-          <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
+          <Tr bg={ colorMode=="dark"?"#171717":"#ffffff" }>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" }   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>0.033</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>4.490</Text></Td>
           </Tr>
           <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" }   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>0.033</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>4.490</Text></Td>
           </Tr>
           <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" }   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>0.033</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>4.490</Text></Td>
           </Tr>
           <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" }   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>0.033</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>4.490</Text></Td>
           </Tr>
           <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" }   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>0.033</Text></Td>
+<Td bg={ colorMode=="dark"?"#171717":"#ffffff" } className='cripto_info_table_data'> <Text>4.490</Text></Td>
           </Tr>
-          <Tr>
-<Td   className='cripto_info_table_data'> <Text color={"green"}>20,352.8</Text></Td>
-<Td className='cripto_info_table_data'> <Text>0.033</Text></Td>
-<Td className='cripto_info_table_data'> <Text>4.490</Text></Td>
-          </Tr>
+        
           
     
             </Tbody>

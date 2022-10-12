@@ -1,10 +1,11 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import BTC from '../../public/bitCoin.png'
 import CriptoInfoTable from './CriptoInfoTable'
 import BuySell from './BuySell'
 import OrderBook from './OrderBook'
 import BidOrderBook from './BidOrderBook '
 import Script from 'next/script'
+import MetamaskConnect from '../../components/MetamaskConnect';
 import TradingViewWidget, { Themes } from 'react-tradingview-widget';
 import {
     Flex, Text, Box, useColorMode, Button, Image, InputLeftElement, Input,Tabs, TabList, TabPanels, Tab, TabPanel ,
@@ -12,11 +13,18 @@ import {
 } from '@chakra-ui/react'
 import { BiSearch } from 'react-icons/bi';
 import { IoMdArrowDropup } from 'react-icons/io';
+import { useAccount } from 'wagmi';
+import { appContext } from '../../pages/app'
 const TradingLanding = () => {
+    const AppData = useContext(appContext)
+    const { address } = useAccount();
+    const { colorMode } = useColorMode();
     return (
+        <>
+{ AppData.address ?
         <Container  flexDirection={{xl:"row",sm:"column"}} display={"flex"} px="0" minWidth="100%" justifyContent={"space-between"} maxWidth="1300px">
-            <Box display={"flex"} flexDirection="column" width="100%"  bg="#171717">
-                <Box bg="#252525" p="0.4rem" borderRadius={"10px"} display={"flex"} flexWrap="wrap" alignItems="center" justifyContent="space-between" >
+            <Box display={"flex"} flexDirection="column" width="100%"   bg={ colorMode=="dark"?"#171717":"#ffffff" }>
+                <Box bg={ colorMode=="dark"?"#252525":"#efefef" } m="0.5rem" borderRadius={"10px"} display={"flex"} flexWrap="wrap" alignItems="center" justifyContent="space-between" >
                     <Flex alignItems={"center"} justifyContent="space-between" flexDirection="row" width={{sm:"100%",md:"14rem"}} mr="0.5rem">
                         <Box display={"flex"} alignItems="center" justifyContent={"flex-start"}>
                             <Image src={BTC} alt='img' />
@@ -102,7 +110,7 @@ const TradingLanding = () => {
                             />
                         </Box>
                         <Flex flexDirection={{ sm: "column", md: "row" }} >
-                            <Box overflow={"auto"} mr="0.2rem" bg="#252525" w={{ xl: "280px", md: "100%" }} h="19rem">
+                            <Box overflow={"auto"} mr="0.2rem" bg={ colorMode=="dark"?"#252525":"#efefef" } w={{ xl: "280px", md: "100%" }} h="19rem">
                                 <Tabs>
                                     <TabList>
                                         <Tab fontSize={"xs"}>Open Order</Tab>
@@ -131,18 +139,18 @@ const TradingLanding = () => {
                                     </TabPanels>
                                 </Tabs>
                             </Box>
-                            <Box mt={{ sm: "1rem", md: "0" }} w={{ xl: "315px", md: "100%" }} h="19rem" bg="#252525"><BuySell /></Box>
+                            <Box mt={{ sm: "1rem", md: "0" }} w={{ xl: "315px", md: "100%" }} h="19rem" bg={ colorMode=="dark"?"#252525":"#efefef" }><BuySell /></Box>
                         </Flex>
                     </Flex >
                 </Box>
             </Box>
-            <Box  bg="#171717" display="flex" flexDirection={{sm:"column",md:"row",xl:"column"}}>
+            <Box bg={ colorMode=="dark"?"#171717":"#ffffff" } display="flex" flexDirection={{sm:"column",md:"row",xl:"column"}}>
               
-                <Box overflow={"auto"} width="100%" mr={{sm:"0.3rem",md:""}} mb={{sm:"1rem",md:""}} mt={{sm:"2.8rem",md:""}}>
+                <Box overflow={"auto"} width="100%" mx={{sm:"0.5rem",md:""}} mr={{sm:"0.3rem",md:""}} mb={{sm:"1rem",md:""}} mt={{sm:"2.8rem",md:""}}>
                     <OrderBook />
                 </Box>
 
-                <Box overflow={"auto"}   width="100%" ml={{sm:"0.3rem",md:"0"}}>
+                <Box overflow={"auto"}   mx={{sm:"0.5rem",md:""}}  width="100%" >
                 <Box display={"flex"} alignItems="flex-end" my="0.5rem">
                     <Box display={"flex"} alignItems="center" px="0.7rem">
                         <Text fontSize={"xl"} color="#349A5C" fontFamily={"satoshi"}>20,352.8</Text>
@@ -155,7 +163,8 @@ const TradingLanding = () => {
                 </Box>
 
             </Box>
-        </Container>
+        </Container> :<MetamaskConnect/> }
+        </>
     )
 }
 
