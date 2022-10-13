@@ -22,7 +22,7 @@ import tronWeb from 'tronweb';
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { FaBars } from 'react-icons/fa';
 import { BsMoonFill, BsSunFill } from 'react-icons/bs';
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import Image from 'next/image';
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -32,20 +32,31 @@ import lightlogo from '../public/light_logo.svg'
 import MetamaskConnect from './MetamaskConnect';
 import ConnectOptModal from './modals/ConnectOptModal'
 import { appContext } from '../pages/app'
-import { useAccount,useDisconnect } from 'wagmi';
 function newapp() {
-  const { address} = useAccount();
-  const { disconnect } = useDisconnect()
+  const [newAddress, setnewAddress] = useState("")
+	const [newTronAddress, setnewTronAddress] = useState("")
   const initRef = React.useRef()
   const appData = useContext(appContext)
   const router = useRouter();
   const { toggleColorMode } = useColorMode();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure()
-console.log("app in nav",appData.address)
+
+
+useEffect(() => {
+	let data;
+  let trondata
+		if (typeof window !== 'undefined') {
+		  data = window.localStorage.getItem('address');
+      setnewAddress(data)
+      trondata = window.localStorage.getItem('tron');
+      setnewTronAddress(trondata)
+		} 
+}, [newAddress,newTronAddress])
+
   return (
     <>
-     <Flex justify={"space-between"} alignItems={"center"}>
+      <Flex justify={"space-between"} alignItems={"center"}>
         <Box cursor={"pointer"}>
           <Image onClick={() => {
             router.push("/")
@@ -54,10 +65,10 @@ console.log("app in nav",appData.address)
 
 
         <Box display={{ sm: "none", md: "none", lg: "block" }}>
- 
-    <UnorderedList display={"flex"} alignItems="center" justifyContent={"space-around"} minWidth="20rem" listStyleType="none">
 
-              {/* <ListItem mx="1rem">
+          <UnorderedList display={"flex"} alignItems="center" justifyContent={"space-around"} minWidth="20rem" listStyleType="none">
+
+            {/* <ListItem mx="1rem">
               <Link href= { appData.metaaddress || appData.tronaddress ? "/convert" :"/">
                 <Text className={router.pathname=="/" ? "link_active":""} my="1rem" cursor={"pointer"} onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
                   Home
@@ -65,82 +76,83 @@ console.log("app in nav",appData.address)
               </Link>
             </ListItem> */}
 
-              <ListItem mx="1rem">
-                <Link href= "/convert" >
-                  <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
-                    Convert
-                  </Text>
-                </Link>
-              </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/convert" >
+                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
+                  Convert
+                </Text>
+              </Link>
+            </ListItem>
 
-              <ListItem mx="1rem">
-                <Link href= "/basictrading" >
-                  <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
-                    Basic Trading
-                  </Text>
-                </Link>
-              </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/basictrading" >
+                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
+                  Basic Trading
+                </Text>
+              </Link>
+            </ListItem>
 
-              <ListItem mx="1rem">
-                <Link href="/market">
-                  <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
-                    Market
-                  </Text>
-                </Link>
-              </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/market">
+                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
+                  Market
+                </Text>
+              </Link>
+            </ListItem>
 
-              <ListItem mx="1rem">
-                <Link href="/margintrading">
-                  <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
-                    Margin Trading
-                  </Text>
-                </Link>
-              </ListItem>
-              
-              <ListItem mx="1rem">
-                <Link href="/myaccount" >
-                  <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
-                    My Account
-                  </Text>
-                </Link>
-              </ListItem>
+            <ListItem mx="1rem">
+              <Link href="/margintrading">
+                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
+                  Margin Trading
+                </Text>
+              </Link>
+            </ListItem>
 
-              <ListItem ml="1.1rem" w="10rem">
-                {appData.address ?
+            <ListItem mx="1rem">
+              <Link href="/myaccount" >
+                <Text cursor={"pointer"} my="1rem" onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>
+                  My Account
+                </Text>
+              </Link>
+            </ListItem>
+
+            <ListItem ml="1.1rem" w="10rem">
+              {(appData.data && appData.isConnected || newAddress) ?
                 <>
-                <Menu >
-                      <MenuButton as={Button} maxW="100%"  border="2px solid gray"  rightIcon={<MdKeyboardArrowDown />}>
-                        <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{appData.address}</Text>
-                      </MenuButton>
-                      <MenuList width={"8rem"}>
-                        <MenuItem fontFamily={"satoshi"} onClick={() => {
-                        disconnect()
-                        }} >
-                          Disconnect
-                        </MenuItem>
-                      </MenuList>
-                    </Menu> 
-                </>: appData.Taddress ?
-                    <> <Menu >
-                      <MenuButton as={Button} maxW="8rem" rightIcon={<MdKeyboardArrowDown />}>
-                        <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{appData.Taddress}</Text>
-                      </MenuButton>
-                      <MenuList>
-                        <MenuItem fontFamily={"satoshi"} onClick={()=>{
-                         appData.setTaddress("")
-                        }
-                          } >
-                          Disconnect
-                        </MenuItem>
-                      </MenuList>
-                    </Menu> </>
+                  <Menu >
+                    <MenuButton as={Button} maxW="100%" border="2px solid gray" rightIcon={<MdKeyboardArrowDown />}>
+                      <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{appData.data ??newAddress}</Text>
+                    </MenuButton>
+                    <MenuList width={"8rem"}>
+                      <MenuItem fontFamily={"satoshi"} onClick={() => {
+                  localStorage.removeItem("address")
+                  window.location.reload()
+                      }} >
+                        Disconnect
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                </> : appData.trondata  || newTronAddress?
+                  <> <Menu >
+                    <MenuButton as={Button} maxW="8rem" rightIcon={<MdKeyboardArrowDown />}>
+                      <Text overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>{appData.trondata ?? newTronAddress}</Text>
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem fontFamily={"satoshi"} onClick={() => {
+                  localStorage.removeItem("tron")
+                  window.location.reload()
+                      }} >
+                        Disconnect
+                      </MenuItem>
+                    </MenuList>
+                  </Menu> </>
 
-                    : <ConnectOptModal />}
-              </ListItem>
-              <ListItem mx="1rem">
-              <Button  variant={"outline"} width={"100%"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
-              </ListItem>
-            </UnorderedList>
+                  : <ConnectOptModal />}
+            </ListItem>
+            <ListItem mx="1rem">
+              <Button variant={"outline"} width={"100%"} onClick={toggleColorMode} > {colorMode == "dark" ? <BsMoonFill size={25} /> : <BsSunFill size={25} />} <Text ml="1rem">{colorMode == "light" ? "light" : "dark"} mode</Text></Button>
+            </ListItem>
+          </UnorderedList>
         </Box>
 
 
@@ -149,7 +161,7 @@ console.log("app in nav",appData.address)
         </Box>
 
       </Flex>
-  
+
       <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent alignItems={"stretch"}>
@@ -162,7 +174,7 @@ console.log("app in nav",appData.address)
           </DrawerHeader>
           <DrawerBody>
             <nav >
-               <UnorderedList display={"flex"} flexDirection="column" alignItems={"strech"} justifyContent={"center"} listStyleType="none">
+              <UnorderedList display={"flex"} flexDirection="column" alignItems={"strech"} justifyContent={"center"} listStyleType="none">
                 {/* <ListItem my="0.5rem">
               <Link href="/">
                 <Button variant={"outline"} w="100%"  className={router.pathname=="/" ? "sidebar_link_active ":""} fontSize="2xl" my="0.5rem" cursor={"pointer"} onClick={onClose} fontFamily="satoshi" fontWeight={"bold"}>

@@ -1,5 +1,5 @@
-    import React from 'react'
-    const  Big= require('big-js');
+import React from 'react'
+import Big from "big-js"
     import {
       Table,
       Thead,
@@ -12,11 +12,10 @@
       TableContainer, Box, Text, Flex,useColorMode,
     } from '@chakra-ui/react'
 import {CgArrowsExchange} from 'react-icons/cg';
-    const FundingAssetTable = ({data}) => { 
+    const SynthassetTable = ({data}) => { 
       const { colorMode } = useColorMode();
       const { isOpen, onOpen, onClose } = useDisclosure()
-      return (
-        <div>
+      return (<>
           <Table variant='simple' mt="1rem">
             <Thead>
               <Tr  bg={colorMode == "dark" ?"#171717" : "#ededed"}>
@@ -27,12 +26,10 @@ import {CgArrowsExchange} from 'react-icons/cg';
               </Tr>
             </Thead>
             <Tbody>
-      {data ? data.map((asset)=>{
-        let decimals = asset.decimal
-  let balance=( Big(asset.balance).div(Big(10).pow( parseInt(decimals)))).toFixed(2)
-  console.log("balance",balance);
-              const x=90
-        return(
+      {data.length >0 ? data.map((asset)=>{
+             const balance = Big(asset.principal).times(Big(asset.borrowIndex)).div(Big(asset.interestIndex)).toFixed(2)
+             const x=90;
+             return(
           <>
            <Tr>
 <Td  className='fund_asset_table_data'> 
@@ -43,7 +40,7 @@ import {CgArrowsExchange} from 'react-icons/cg';
 
 </Td>
 <Td>
-<Text fontFamily="satoshi"  fontSize={"lg"}>{balance}</Text>
+<Text fontFamily="satoshi"  fontSize={"lg"}>{parseInt( balance).toString()}</Text>
 {/* <Text fontFamily="satoshi"color="gray"  fontSize={"xs"}>{asset.balance}</Text> */}
 </Td>
 
@@ -55,19 +52,14 @@ import {CgArrowsExchange} from 'react-icons/cg';
 <Td className='fund_asset_table_data'>
     <CgArrowsExchange size={40}/>
 </Td>
-
           </Tr>
           </>
         )
       }) :""}
-         
-          
-         
-  
             </Tbody>
           </Table>
-        </div>
+        </>
       )
     }
     
-    export default FundingAssetTable
+    export default SynthassetTable

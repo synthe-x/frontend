@@ -1,38 +1,77 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import {
   Flex, Text,Image, Box, useColorMode, Button, ButtonGroup, Select, InputLeftElement, Input, Tabs, TabList, TabPanels, Tab, TabPanel,
   useDisclosure, InputGroup, Container, Divider
 } from '@chakra-ui/react'
 import RecentTransTable from './RecentTransTable'
 import AssetTable from './AssetTable'
+import SynthassetTable from './SynthassetTable'
 import { BiSearch } from 'react-icons/bi';
 import { appContext } from '../../pages/app'
 import MetamaskConnect from '../../components/MetamaskConnect';
 import { useAccount } from 'wagmi';
+const axios = require('axios').default;
 const MyAccountLanding = () => {
+  const [collateralsasset, setcollateralsasset] = useState({})
+  const [synthsasset, setsynthsasset] = useState({})
+  const [newAddress, setnewAddress] = useState("")
+  const [newTronAddress, setnewTronAddress] = useState("")
   const { address} = useAccount();
   const { colorMode } = useColorMode();
   const AppData = useContext(appContext)
-const [search, setsearch] = useState('')
-const funding=[
-  { name: "BTC",Balance:"323232",holdbalance:"6553",percent:"45"},
-  { name: "ETH",Balance:"6467",holdbalance:"63424",percent:"35"},
-  { name: "TRON",Balance:"32324",holdbalance:"52343",percent:"89"},
-  { name: "HARMONY",Balance:"86754",holdbalance:"35113",percent:"45"},
-  { name: "SHIBU",Balance:"435441",holdbalance:"444",percent:"87"},
-  { name: "MATIC",Balance:"3245431",holdbalance:"08767",percent:"70"},
-]
-  
+const [collectralsearch, setcollectralsearch] = useState('')
+const [synthsearch, setsynthsearch] = useState('')
+
+useEffect(() => {
+  axios.get('http://localhost:3031/user/TAHfCaWwkxbrg2fNeTmqDhZ3xumExNi9qg/collateral')
+    .then((resp) => {
+      console.log(resp.data.data)
+      setcollateralsasset(resp.data.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+
+  axios.get('http://localhost:3031/user/TAHfCaWwkxbrg2fNeTmqDhZ3xumExNi9qg/debt/0')
+    .then((resp) => {
+      console.log(resp.data.data)
+      setsynthsasset(resp.data.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+}, [])
+
+console.log("asset",synthsasset)
 const handleSearch = (event) => {
-  setsearch(event.target.value);
+  setcollectralsearch(event.target.value);
 };
-const data =  funding.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
+const synthhandleSearch = (event) => {
+  setsynthsearch(event.target.value);
+};
+
+const data = Object.values(collateralsasset).filter((item) =>
+    item.name.toLowerCase().includes(collectralsearch.toLowerCase())
   )
+const synthsdata = Object.values(synthsasset).filter((item) =>
+    item.name.toLowerCase().includes(synthsearch.toLowerCase())
+  )
+  useEffect(() => {
+    let data;
+    let trondata
+      if (typeof window !== 'undefined') {
+        data = window.localStorage.getItem('address');
+        trondata = window.localStorage.getItem('tron');
+        setnewAddress(data)
+        setnewTronAddress(trondata)
+      } 
+  }, [newAddress,newTronAddress])
 
 return (
     <>
- {AppData.address ?
+ {AppData.address || newAddress || newTronAddress || AppData.trondata?
      <Tabs variant='unstyled'  width="100%" mr="0.8rem">
   <TabList>
     <Tab  _selected={{ border:"2px solid white",borderRadius:"10px"}} fontFamily={"satoshi"}>Overview</Tab>
@@ -64,8 +103,22 @@ return (
             <Button  size='sm' bg='#171717' color="white">Transfer</Button>
           </ButtonGroup>
         </Flex>
-        <Box  overflow="auto">
-        <RecentTransTable transactionType="Funding" img="https://raw.githubusercontent.com/Chainscore/assets/main/WALLET.png" />
+       
+        <Box  overflow="auto">  
+        <Box maxWidth={"20rem"}>  <InputGroup>
+          <InputLeftElement
+            pointerEvents='none'
+       
+           
+            children={<BiSearch color='gray.300' />}
+          />
+          <Input type='text' value={collectralsearch}  placeholder='search'  onChange={handleSearch}/>
+        </InputGroup>
+        </Box>      
+      {data.length >0 ?<AssetTable data={data}/>:""}  
+       
+
+        {/* <RecentTransTable transactionType="Funding" img="https://raw.githubusercontent.com/Chainscore/assets/main/WALLET.png" /> */}
         </Box>
       </Box> 
       <Box  bg={ colorMode=="dark"?"#171717":"#ffffff" } w={{sm:"100%",lg:"40rem"}} p="0.5rem" mt={{sm:"1rem",lg:"0"}} overflow="auto">  
@@ -184,11 +237,12 @@ return (
            
             children={<BiSearch color='gray.300' />}
           />
-          <Input type='text' value={search}  placeholder='search'  onChange={handleSearch}/>
+          <Input type='text' value={synthsearch}  placeholder='search'  onChange={synthhandleSearch}/>
         </InputGroup>
         </Box>
         <Box  overflow="auto">
-          <AssetTable data={data}  />
+        {synthsdata.length >0 ?<SynthassetTable  data={synthsdata}/>:""}  
+      
         </Box>
       </Box>
 

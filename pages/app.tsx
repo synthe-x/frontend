@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext,useRef } from 'react';
 import { Box, Text, Flex, Divider, useColorMode, Skeleton } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import IssuanceTable from '../components/IssuanceTable';
@@ -6,14 +6,16 @@ import CollateralTable from '../components/CollateralTable';
 import MetamaskConnect from '../components/MetamaskConnect';
 import { getContract } from '../src/utils';
 import { useAccount } from 'wagmi';
-
 import web3 from "web3";
 import Chart from '../components/DonutChart';
 export const appContext = createContext(1);
 
 function App() {
 	const[Taddress, setTaddress]= useState("")
-	const { address } = useAccount();
+	const [newAddress, setnewAddress] = useState("")
+	const [newTronAddress, setnewTronAddress] = useState("")
+	// const [collateralsasset, setcollateralsasset] = useState({})
+	const { address,isConnected } = useAccount();
 	const { colorMode } = useColorMode();
 	const [CollateralAssets, setCollateralAssets] = useState([]);
 	const [IssuanceAssets, setIssuanceAssets] = useState([]);
@@ -22,11 +24,49 @@ function App() {
 	const [minCRatio, setMinCRatio] = useState(0)
 
 	function TronConnect() {
-		if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
-			setTaddress(window.tronWeb.defaultAddress.base58)
+		if (window.tronWeb && window.tronWeb.defaultAddress.base58 && typeof window !== 'undefined') {
+			setTaddress(window.tronWeb.defaultAddress.base58)	
 		}
 	}
-	console.log("app in app",address)
+		if ( typeof window !== 'undefined' && isConnected) {
+			window.localStorage.setItem('address', address)
+		} 
+		if ( typeof window !== 'undefined' && Taddress) {
+			window.localStorage.setItem('tron', Taddress)
+		} 
+
+	let data;
+	let trondata;
+	if (typeof window !== 'undefined') {
+
+		data = window.localStorage.getItem('address');
+		trondata = window.localStorage.getItem('tron');
+	}
+
+	// useEffect(() => {
+	// 	axios.get('http://localhost:3030/user/TTvnhvkLDqhdXtAGPfCQfPR7ffE8uPVSe6/collateral')
+	// 		.then((resp) => {
+	// 			console.log(resp.data.data)
+	// 			setcollateralsasset(resp.data.data)
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err)
+	// 		})
+
+	// }, [])
+
+
+		useEffect(() => {
+			let data;
+			 let newtrondata;
+				if (typeof window !== 'undefined') {
+				  data = window.localStorage.getItem('address');
+			  setnewAddress(data)
+			  newtrondata = window.localStorage.getItem('tron');
+			  setnewTronAddress(newtrondata)
+				} 
+		}, [newAddress,newTronAddress])
+		
 
 
 
@@ -34,9 +74,9 @@ function App() {
 	let available_to_Borrow = limit_to_Borrow - BorrowBalance;
 	return (
 		<>
-			<appContext.Provider value={{ TronConnect,address,Taddress, setTaddress }}>
+			<appContext.Provider value={{ TronConnect,data,trondata, isConnected,}}>
 				<Navbar />
-				{address || Taddress ? 
+				{address || trondata || newAddress ||newTronAddress? 
 				<Box width="auto">
 					<Flex flexDirection={{ sm: 'column', lg: 'row' }}
 						my="1rem"

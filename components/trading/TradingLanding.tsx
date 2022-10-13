@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useEffect,useState} from 'react'
 import BTC from '../../public/bitCoin.png'
 import CriptoInfoTable from './CriptoInfoTable'
 import BuySell from './BuySell'
@@ -16,12 +16,26 @@ import { IoMdArrowDropup } from 'react-icons/io';
 import { useAccount } from 'wagmi';
 import { appContext } from '../../pages/app'
 const TradingLanding = () => {
+    const [newAddress, setnewAddress] = useState("")
+    const [newTronAddress, setnewTronAddress] = useState("")
     const AppData = useContext(appContext)
     const { address } = useAccount();
     const { colorMode } = useColorMode();
+
+
+    useEffect(() => {
+        let data;
+        let trondata
+          if (typeof window !== 'undefined') {
+            data = window.localStorage.getItem('address');
+            trondata = window.localStorage.getItem('tron');
+            setnewAddress(data)
+            setnewTronAddress(trondata)
+          } 
+      }, [newAddress,newTronAddress])
     return (
         <>
-{ AppData.address ?
+{AppData.address || newAddress || newTronAddress || AppData.trondata?
         <Container  flexDirection={{xl:"row",sm:"column"}} display={"flex"} px="0" minWidth="100%" justifyContent={"space-between"} maxWidth="1300px">
             <Box display={"flex"} flexDirection="column" width="100%"   bg={ colorMode=="dark"?"#171717":"#ffffff" }>
                 <Box bg={ colorMode=="dark"?"#252525":"#efefef" } m="0.5rem" borderRadius={"10px"} display={"flex"} flexWrap="wrap" alignItems="center" justifyContent="space-between" >
